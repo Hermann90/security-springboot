@@ -1,0 +1,12 @@
+Generate keys with openssl
+1- install openssl using Choco in windows
+>choco install openssl
+
+#Keypair : cette cle va nous permetre de generer les cles public et les cle privees
+openssl genrsa -out keypair1.pem 2048
+
+# public key : elle va etre partager par l'ensemble des Microservice pour signer le token
+openssl rsa -in keypair1.pem -pubout -out public1.pem
+
+# private key : c'est la cle qui va rester uniquement chez le service qui va faire l'authentification
+openssl pkcs8 -topk8 -inform PEM -nocrypt -in keypair1.pem -out private1.pem
